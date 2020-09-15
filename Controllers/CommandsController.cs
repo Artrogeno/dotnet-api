@@ -96,5 +96,20 @@ namespace Commander.Controllers
       _repository.SaveChanges();
       return NoContent();
     }
+
+    //Delete api/commands/{id}
+    [HttpDelete("{id}")]
+    public ActionResult DeleteCommand(int id)
+    {
+      var commandModalFromRepo = _repository.GetCommandById(id);
+      if (commandModalFromRepo == null)
+      {
+        return NotFound();
+      }
+      _repository.DeleteCommand(commandModalFromRepo);
+      _repository.SaveChanges();
+
+      return NoContent();
+    }
   }
 }
